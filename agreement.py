@@ -2,7 +2,9 @@ from multiprocessing import Pool
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy.stats as stats
-import utils
+
+def flatten(listoflists):
+    return [item for sublist in listoflists for item in sublist]
 
 def halfwhere(whereM):
     half_indices = whereM[0] > whereM[1]
@@ -28,7 +30,7 @@ def get_distance_matrix(all_labels, dist_fn, label_ij=None):
 
     if label_ij is None:
         label_range = range(len(all_labels))
-        args = utils.flatten([[(a, b, all_labels[a], all_labels[b], dist_fn) for a in label_range] for b in label_range])
+        args = flatten([[(a, b, all_labels[a], all_labels[b], dist_fn) for a in label_range] for b in label_range])
     else:
         args = [(a, b, all_labels[a], all_labels[b], dist_fn) for a, b in zip(label_ij[0], label_ij[1])]
     with Pool() as p:
