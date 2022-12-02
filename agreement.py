@@ -90,8 +90,6 @@ class DoDa():
         else:
             return np.mean([1 - stats.ks_2samp([x], d_e, alternative="greater").pvalue for x in d_o])
 
-    def _sigma(self, thresh=0.05, debug=False):
-
 
 class InterAnnotatorAgreement(DoDa):
     @classmethod
